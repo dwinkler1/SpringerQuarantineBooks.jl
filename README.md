@@ -15,3 +15,19 @@ bl = getbooklist(path, name = "booklist.xlsx")
 ```julia
 loadbooks(path, bl[1:3, :])
 ```
+
+### Example
+
+This example will download all Mathematics books:
+
+```julia
+using SpringerQuarantineBooks
+using DataFrames
+
+path = "/home/daniel/Documents/books"
+booklist = getbooklist(path, name = "booklist.xlsx")
+
+mathbooks = filter(row -> occursin(r".*Mathematics.*", row[Symbol("English Package Name")]),booklist)
+
+loadbooks(path, mathbooks[1:3, :])
+```
