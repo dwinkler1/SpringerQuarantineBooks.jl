@@ -1,5 +1,5 @@
 import Pkg; Pkg.activate(".")
-include("src/SpringerQuaratineBooks.jl")
+include("src/SpringerQuarantineBooks.jl")
 using .SpringerQuarantineBooks
 using DataFrames
 

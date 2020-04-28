@@ -1,8 +1,3 @@
-name = "SpringerQuaratineBooks"
-uuid = "b13817dd-3a42-44ef-9016-7dfa99685310"
-authors = ["Daniel Winkler <danielw2904@disroot.org>"]
-version = "0.1.0"
-
 [deps]
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
