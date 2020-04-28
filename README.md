@@ -1,6 +1,6 @@
 # Springer books for the quarantine
 
-Two functions are exported by this package (see [example.jl](./example.jl)):
+Two functions are exported by this package:
 
 1. The list of currently free books can be downloaded for subsetting:
 This function returns a DataFrame of the list.
