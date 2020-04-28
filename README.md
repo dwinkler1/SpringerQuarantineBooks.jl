@@ -18,7 +18,7 @@ loadbooks(path, bl[1:3, :])
 
 ### Example
 
-This example will download all Mathematics books:
+This example will download the first three Mathematics books:
 
 ```julia
 using SpringerQuarantineBooks
