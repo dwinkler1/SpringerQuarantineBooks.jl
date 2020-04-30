@@ -1,6 +1,6 @@
 name = "SpringerQuarantineBooks"
 uuid = "cd0b2054-b5ac-4e86-8e29-e69c669529a6"
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
