@@ -38,14 +38,8 @@ module SpringerQuarantineBooks
         fixednames = replace.(string.(names(booklist)), r"\s" => "_")
         bl = DataFrames.rename(booklist, names(booklist) .=> Symbol.(fixednames))
         subjects = unique(bl.English_Package_Name)
-        if(fixnames)
-            fixer = r"[,\s/:]+"
-            subjects = replace.(subjects, fixer => "_")
-        end
         
-        for subject in subjects
-            isdir(makepath(path, subject)) || mkdir(makepath(path, subject))
-        end
+        fixnames && (fixer = r"[,\s/:]+")
 
         baseurl = "https://link.springer.com/content/pdf"
         
@@ -60,7 +54,7 @@ module SpringerQuarantineBooks
                 folder = replace(i.English_Package_Name, r"[/:]+" => "_") 
                 book = replace(i.Book_Title, r"[/:]+" => "_")
             end
-
+            isdir(makepath(path, folder)) || mkdir(makepath(path, folder))
             fname = folder * '/' * book * ".pdf"
             isfile(fname) && continue
             
@@ -68,7 +62,7 @@ module SpringerQuarantineBooks
                 res = HTTP.get(url)
                 dlurl = replace(res.request.target, r"\%2F|/book/" => '/') * ".pdf"
                 open(makepath(path, fname), "w") do io
-                    book = HTTP.request("GET", baseurl * dlurl)
+                    book = HTTP.get(baseurl * dlurl)
                     write(io, book.body)
                 end
                 verbose && ProgressMeter.next!(progress; showvalues = [(Symbol("Book name"), i.Book_Title), (:Folder, i.English_Package_Name)])
