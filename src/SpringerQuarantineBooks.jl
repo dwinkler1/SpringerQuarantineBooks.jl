@@ -3,6 +3,7 @@ module SpringerQuarantineBooks
     import HTTP 
     import XLSX
     import DataFrames
+    import ProgressMeter
 
     export getbooklist,
             loadbooks
@@ -47,6 +48,9 @@ module SpringerQuarantineBooks
         end
 
         baseurl = "https://link.springer.com/content/pdf"
+        
+        verbose && (progress = ProgressMeter.Progress(size(bl, 1); desc = "Downloading"))
+    
         for i in eachrow(bl)
             url = i.OpenURL
             if(fixnames)
@@ -67,7 +71,7 @@ module SpringerQuarantineBooks
                     book = HTTP.request("GET", baseurl * dlurl)
                     write(io, book.body)
                 end
-                verbose && println("Loaded: ", fname)
+                verbose && ProgressMeter.next!(progress; showvalues = [(Symbol("Book name"), i.Book_Title), (:Folder, i.English_Package_Name)])
             catch e
                 println("Error: ", e, "when loading", url)
             end
