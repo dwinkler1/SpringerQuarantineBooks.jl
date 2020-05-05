@@ -50,12 +50,14 @@ module SpringerQuarantineBooks
             if(fixnames)
                 folder = replace(i.English_Package_Name, fixer => "_")
                 book = replace(i.Book_Title, fixer => "_")
+                isbn = replace(i.Electronic_ISBN, fixer => "_")
             else
                 folder = replace(i.English_Package_Name, r"[/:]+" => "_") 
                 book = replace(i.Book_Title, r"[/:]+" => "_")
+                isbn = replace(i.Electronic_ISBN, r"[/:]+" => "_")
             end
             isdir(makepath(path, folder)) || mkdir(makepath(path, folder))
-            fname = folder * '/' * book * ".pdf"
+            fname = folder * '/' * book * '_' * isbn * ".pdf"
             isfile(fname) && continue
             
             try
