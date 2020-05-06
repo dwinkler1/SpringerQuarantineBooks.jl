@@ -19,7 +19,7 @@ module SpringerQuarantineBooks
     function getbooklist(path = pwd(); name = "booklist.xlsx")
         fname = makepath(path, name)
         if(!isfile(fname))
-            bookurl = "https://resource-cms.springernature.com/springer-cms/rest/v1/content/17858272/data/v4/"
+            bookurl = "https://resource-cms.springernature.com/springer-cms/rest/v1/content/17858272/data/v5/"
             req = HTTP.get(bookurl)
             open(fname, "w") do io
                 write(io, req.body)
