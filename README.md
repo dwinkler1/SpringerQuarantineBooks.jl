@@ -31,3 +31,17 @@ mathbooks = filter(row -> occursin(r".*Mathematics.*", row[Symbol("English Packa
 
 loadbooks(path, mathbooks[1:3, :])
 ```
+
+Some books are available as EPUBs. Those can be downloaded by setting `format="epub"`. `format` is not case sensitive. 
+
+```julia
+loadbooks(path, mathbooks[1:3,:], format = "epub")
+```
+
+Further options are:
+
+-  fixnames = true -> Replace whitespace and commas in filenames with '_'
+-  verbose = true -> Show progress bar
+-  printerrors = (lowercase(format) == "pdf") -> Print error message if download fails
+    defaults to `true` only if format is pdf as errors occur when epub is not available
+
