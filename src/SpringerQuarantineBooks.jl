@@ -69,8 +69,8 @@ module SpringerQuarantineBooks
             try
                 res = HTTP.get(url)
                 dlurl = replace(res.request.target, r"\%2F|/book/" => '/') * '.' * format
+                book = HTTP.get(baseurl * dlurl)
                 open(makepath(path, fname), "w") do io
-                    book = HTTP.get(baseurl * dlurl)
                     write(io, book.body)
                 end
                 verbose && ProgressMeter.next!(progress; showvalues = [(Symbol("Book name"), i.Book_Title), (:Folder, i.English_Package_Name)])
