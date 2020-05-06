@@ -34,7 +34,7 @@ module SpringerQuarantineBooks
         return df
     end
 
-    function loadbooks(path = pwd(), booklist = getbooklist(path); format = "pdf", fixnames = true, verbose = true, printerrors = (format == "pdf"))
+    function loadbooks(path = pwd(), booklist = getbooklist(path); format = "pdf", fixnames = true, verbose = true, printerrors = (lowercase(format) == "pdf"))
         format = lowercase(format)
         @assert format ∈ ["pdf", "epub"] """ Valid formats are "pdf" and "epub" """
         fixednames = replace.(string.(names(booklist)), r"\s" => "_")
@@ -54,9 +54,9 @@ module SpringerQuarantineBooks
         for i in eachrow(bl)
             url = i.OpenURL
             if(fixnames)
-                folder = replace(i.English_Package_Name, fixer => "_")
-                book = replace(i.Book_Title, fixer => "_")
-                isbn = replace(i.Electronic_ISBN, fixer => "_")
+                folder = replace(strip(i.English_Package_Name), fixer => "_")
+                book = replace(strip(i.Book_Title), fixer => "_")
+                isbn = replace(strip(i.Electronic_ISBN), fixer => "_")
             else
                 folder = replace(i.English_Package_Name, r"[/:]+" => "_")
                 book = replace(i.Book_Title, r"[/:]+" => "_")
